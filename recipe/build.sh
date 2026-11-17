@@ -9,6 +9,8 @@ else
   export CMAKE_ARGS="${CMAKE_ARGS} -DXSQL_DISABLE_ARCH_NATIVE=ON"
 fi
 
-cmake -S "${SRC_DIR}" -B build/ -G Ninja ${CMAKE_ARGS}
+cmake -S "${SRC_DIR}" -B build/ -G Ninja ${CMAKE_ARGS} \
+      -DCMAKE_AR="$(command -v ${AR})" \
+      -DCMAKE_RANLIB="$(command -v ${RANLIB})"
 cmake --build build/ --parallel "${CPU_COUNT}"
 cmake --install build/
